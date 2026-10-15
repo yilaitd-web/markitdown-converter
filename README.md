@@ -84,7 +84,16 @@ sha256sum -c SHA256SUMS.txt
 > ⚠️ 本安装包使用 GPG 签名保障完整性，未购买商业代码签名证书；Windows SmartScreen 首次运行时如显示"未知发布者"，请点击"更多信息 → 仍要运行"。商业代码签名证书需向 DigiCert、Sectigo 等 CA 付费申请并完成身份验证。
 > ⚠️ The installer is integrity-protected via GPG but is not commercially code-signed; if SmartScreen shows "unknown publisher", click "More info → Run anyway". A commercial code-signing certificate requires paid application and identity verification with a CA such as DigiCert or Sectigo.
 
+## 🔏 代码签名策略 / Code Signing Policy
+
+本项目已申请 SignPath Foundation 免费代码签名（审核中），完整的签名策略（团队角色、构建流程、签名范围）见 [SIGNING.md](./SIGNING.md)。
+This project has applied for free code signing from the SignPath Foundation (pending approval). The full signing policy (team roles, build process, signing scope) is documented in [SIGNING.md](./SIGNING.md).
+
+**Free code signing provided by SignPath.io, certificate by SignPath Foundation.**
+
 ## 🔒 隐私说明 / Privacy
+
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
 - 本软件完全离线运行，**不收集、不上传任何个人数据**，不包含任何遥测、分析或跟踪代码。
 - 转换过程全部在本地完成，你的文件不会离开你的电脑。
