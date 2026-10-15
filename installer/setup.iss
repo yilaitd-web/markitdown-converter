@@ -37,7 +37,7 @@ VersionInfoProductName=MarkItDown 转换器
 VersionInfoProductVersion={#MyAppVersion}
 
 [Languages]
-Name: "chinesesimp"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
+Name: "chinesesimp"; MessagesFile: "languages\ChineseSimplified.isl"
 
 [Files]
 Source: "src\markitdown_gui.py"; DestDir: "{app}"
