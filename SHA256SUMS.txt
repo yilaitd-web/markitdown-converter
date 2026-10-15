@@ -1,0 +1,2 @@
+af89c7250ce4debf8414c61ff7bd275148db6a28efa2a17c1e56f73e15d71c3e *MarkItDown转换器安装包_v1.1.4.exe
+9c2dd70ba81a2563dc9775ed4be977d3bb106e87f398d42437f2e4f9b980610a *MarkItDown转换器使用说明书.pdf
