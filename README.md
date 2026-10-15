@@ -16,7 +16,7 @@ A Windows desktop tool that batch-converts PDF, Word, PowerPoint, Excel, images 
 ## 📥 下载安装 / Download & Install
 
 1. 前往 [Releases](https://github.com/yilaitd-web/markitdown-converter/releases) 页面 / Go to [Releases](https://github.com/yilaitd-web/markitdown-converter/releases)
-2. 下载最新版本的 `MarkItDown转换器安装包_vX.X.X.exe` / Download the latest `MarkItDown转换器安装包_vX.X.X.exe`
+2. 下载最新版本的安装包 / Download the latest installer (e.g. `MarkItDown-Converter-Setup-v1.1.4.exe`)
 3. 双击运行安装程序，按向导完成安装 / Run the installer and follow the wizard
 
 ## 🔐 安装包完整性验证 / Integrity Verification
@@ -27,7 +27,7 @@ All release files ship with SHA-256 checksums and a GPG signature to detect tamp
 ### 方式一：SHA-256 校验 / Option 1: SHA-256
 
 ```powershell
-Get-FileHash "MarkItDown转换器安装包_v1.1.4.exe" -Algorithm SHA256
+Get-FileHash "MarkItDown-Converter-Setup-v1.1.4.exe" -Algorithm SHA256
 ```
 
 将输出与 [`SHA256SUMS.txt`](./SHA256SUMS.txt) 中公布的哈希值对比，两者一致即表明文件完整。
@@ -58,7 +58,8 @@ sha256sum -c SHA256SUMS.txt
 
 ## 📖 使用说明 / Documentation
 
-详见 [`MarkItDown转换器使用说明书.pdf`](./MarkItDown转换器使用说明书.pdf)。
+使用说明书随 Release 附件提供：`MarkItDown-Converter-UserManual-v1.1.4-zh.pdf`。
+The user manual ships with each release: `MarkItDown-Converter-UserManual-v1.1.4-zh.pdf`.
 
 ## 📋 系统要求 / Requirements
 
