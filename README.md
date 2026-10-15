@@ -13,6 +13,41 @@ A Windows desktop tool that batch-converts PDF, Word, PowerPoint, Excel, images 
 - 🖥️ 图形界面，免命令行操作 / GUI, no command line required
 - 🌐 完全离线运行，无需联网（OCR 语言包除外）/ Fully offline (except OCR language packs)
 
+## 📂 源码结构 / Source Code
+
+本仓库包含完整源代码，基于 Python 3.12 + customtkinter 构建。
+The complete source code is included. The app is built with Python 3.12 + customtkinter.
+
+```
+src/                    应用源代码 / Application source
+├── markitdown_gui.py   主程序：图形界面 + --worker 后台转换进程 / Main GUI + worker process
+├── update.pyw          更新器与日志中心（--view 仅打开日志中心）/ Updater & log center
+├── logtools.py         日志导出工具（TXT/PDF，纯标准库）/ Log export utilities (stdlib-only)
+└── app.ico             程序图标 / Application icon
+installer/setup.iss     Inno Setup 安装包构建脚本 / Installer build script (Inno Setup)
+launch.bat              开发用启动器（无控制台窗口）/ Dev launcher (no console)
+requirements.txt        Python 依赖清单 / Python dependencies
+```
+
+## 🔧 自行构建 / Building from Source
+
+1. 安装 Python 3.12（64 位）/ Install Python 3.12 (64-bit)
+2. 安装依赖 / Install dependencies：
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. 开发模式运行 / Run in dev mode：双击 `launch.bat`（或执行 `pythonw src/markitdown_gui.py`）
+   Double-click `launch.bat` (or run `pythonw src/markitdown_gui.py`)
+
+4. 打包安装包 / Build the installer：
+   - 安装 [Inno Setup](https://jrsoftware.org/isdl.php) / Install [Inno Setup](https://jrsoftware.org/isdl.php)
+   - 将 `src/` 下全部文件与使用说明书 PDF 放入 `installer/src/` / Copy everything under `src/` plus the user-manual PDF into `installer/src/`
+   - 离线依赖（可选）：下载 Python 3.12 离线安装包及 `pip download -r requirements.txt` 得到的 wheels，放入 `installer/src/redist/` 与 `installer/src/wheels/`
+     Offline deps (optional): fetch the Python 3.12 offline installer and wheels via `pip download -r requirements.txt` into `installer/src/redist/` and `installer/src/wheels/`
+   - 用 Inno Setup 编译 `installer/setup.iss` / Compile `installer/setup.iss` with Inno Setup
+
 ## 📥 下载安装 / Download & Install
 
 1. 前往 [Releases](https://github.com/yilaitd-web/markitdown-converter/releases) 页面 / Go to [Releases](https://github.com/yilaitd-web/markitdown-converter/releases)

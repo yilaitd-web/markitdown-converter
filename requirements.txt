@@ -1,0 +1,7 @@
+# MarkItDown 转换器 Python 依赖 / Python dependencies
+# Python 3.12 (64-bit) 测试通过 / Tested with Python 3.12 (64-bit)
+markitdown[pptx,docx,xlsx,xls,pdf,outlook,audio-transcription]==0.1.8
+customtkinter==6.0.0
+tkinterdnd2==0.6.4
+winsdk==1.0.0b10
+pypdfium2==5.14.0

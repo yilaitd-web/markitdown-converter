@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 构建产物 / Build artifacts
+build/
+dist/
+installer/Output/
+installer/issupport/
+
+# 安装包内部暂存（大体积二进制，自行下载）/ Installer staging (large binaries, fetch separately)
+installer/src/wheels/
+installer/src/redist/
+installer/src/python-*.exe
+
+# 运行时用户配置（含本机路径，勿提交）/ Runtime user config (contains local paths)
+markitdown_gui_config.json
+src/markitdown_gui_config.json
+
+# 日志 / Logs
+*.log
+更新日志.txt
+安装日志.txt
