@@ -1,1 +1,12 @@
-Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.12.8/python-3.12.8-amd64.exe" -OutFile "x.exe"
+      - name: Stage application files
+        run: |
+          Copy-Item src/markitdown_gui.py,src/update.pyw,src/logtools.py,src/app.ico installer/src/
+          Copy-Item docs/user-manual-v1.1.4-zh.pdf "installer/src/MarkItDown转换器使用说明书.pdf"
+          $enManual = "docs/user-manual-v1.1.4-en.pdf"
+          if (Test-Path $enManual) {
+            Copy-Item $enManual "installer/src/MarkItDown Converter User Guide.pdf"
+          } else {
+            Copy-Item docs/user-manual-v1.1.4-zh.pdf "installer/src/MarkItDown Converter User Guide.pdf"
+          }
+          $ver = (Select-String -Path installer/setup.iss -Pattern '#define MyAppVersion "([^"]+)"').Matches.Groups[1].Value
+          Set-Content -Path installer/src/VERSION -Value $ver -NoNewline
