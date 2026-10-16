@@ -1,2 +1,1 @@
-${{ steps.upload.outputs.artifact-id }}
-中文测试
+${{ secrets.FOO }}
