@@ -188,7 +188,7 @@ STRINGS = {
         "wc_scanning": "Scanning WeChat file folders…",
         "wc_none_found": "No received WeChat files were found\n(make sure WeChat is signed in and has received files)",
         "wc_load_more": "▼ Load more ({n} more)",
-        "wc_no_match": "No files match \"{kw}\"",
+        "wc_no_match": 'No files match "{kw}"',
         "wc_selected": "{n} selected",
         "wc_confirm": "＋ Add to Queue",
         "wc_log_added": "WeChat: added {n} file(s)",
@@ -240,7 +240,7 @@ STRINGS = {
         "log_engine_fix": "  ➜ Run \"Check for Updates · Log Center\" from the Start Menu to repair automatically; if it still fails, run the installer again",
         "log_done": "  ✓ Done{tag}  {secs:.2f}s",
         "tag_ocr": " (OCR)",
-        "tag_imgs": " (images ×{n})",
+        "tag_imgs": " (images × {n})",
         "log_empty": "  ⚠ No text content; no file was created ({hint})",
         "log_more": "  … and {n} more file(s) (command echo omitted)",
         "engine_broken": "The conversion engine is unavailable. Run \"Check for Updates · Log Center\" from the Start Menu to repair it; if that fails, run the installer again.",
@@ -1618,7 +1618,7 @@ class App(ctk.CTk, TkinterDnD.DnDWrapper):
         self.progress.grid(row=9, column=0, sticky="ew", padx=22, pady=(12, 0))
         self.progress.set(0)
 
-        self.status_var = tk.StringVar(value=T["status_ready"])
+        self.status_var = ctk.StringVar(value=T["status_ready"])
         ctk.CTkLabel(self, textvariable=self.status_var,
                      font=ctk.CTkFont(family=MONO, size=12), text_color=C_DIM
                      ).grid(row=10, column=0, sticky="w", padx=24, pady=(4, 0))

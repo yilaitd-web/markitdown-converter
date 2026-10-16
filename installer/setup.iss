@@ -327,7 +327,7 @@ type
     ptX, ptY: LongInt;
   end;
 
-function PeekMessage(var lpMsg: TSetupMsg; hWnd: LongInt; wMsgFilterMin, wMsgFilterMax, wRemoveMsg: LongWord): Boolean; external 'PeekMessageA@win32.dll stdcall'.replace('win32','user32');
+function PeekMessage(var lpMsg: TSetupMsg; hWnd: LongInt; wMsgFilterMin, wMsgFilterMax, wRemoveMsg: LongWord): Boolean; external 'PeekMessageA@user32.dll stdcall';
 function TranslateMessage(const lpMsg: TSetupMsg): Boolean; external 'TranslateMessage@user32.dll stdcall';
 function DispatchMessage(const lpMsg: TSetupMsg): LongInt; external 'DispatchMessageA@user32.dll stdcall';
 
