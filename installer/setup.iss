@@ -327,7 +327,7 @@ type
     ptX, ptY: LongInt;
   end;
 
-function PeekMessage(var lpMsg: TSetupMsg; hWnd: LongInt; wMsgFilterMin, wMsgFilterMax, wRemoveMsg: LongWord): Boolean; external 'PeekMessageA@user32.dll stdcall';
+function PeekMessage(var lpMsg: TSetupMsg; hWnd: LongInt; wMsgFilterMin, wMsgFilterMax, wRemoveMsg: LongWord): Boolean; external 'PeekMessageA@win32.dll stdcall'.replace('win32','user32');
 function TranslateMessage(const lpMsg: TSetupMsg): Boolean; external 'TranslateMessage@user32.dll stdcall';
 function DispatchMessage(const lpMsg: TSetupMsg): LongInt; external 'DispatchMessageA@user32.dll stdcall';
 
@@ -704,7 +704,7 @@ begin
   DeleteFile(TmpFile);
   DeleteFile(CodeFile);
   if not Exec(ExpandConstant('{cmd}'), '/v:on /s /c "' + ExeOrCmd +
-      ' -c "import sys;open(sys.argv[1],''w'',encoding=''utf-8-sig'').write(sys.executable+''\n''+str(sys.version_info[0])+''\n''+str(sys.version_info[1])+''\n''+(''64'' if sys.maxsize>2**32 else ''32'))" "' +
+      ' -c "import sys;open(sys.argv[1],''w'',encoding=''utf-8-sig'').write(sys.executable+''\n''+str(sys.version_info[0])+''\n''+str(sys.version_info[1])+''\n''+(''64'' if sys.maxsize>2**32 else ''32''))" "' +
       TmpFile + '"&echo !ERRORLEVEL!>"' + CodeFile + '""', '', SW_HIDE, ewNoWait, Dummy) then
     Exit;
   Waited := 0;
