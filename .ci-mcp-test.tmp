@@ -1,12 +1,71 @@
+name: Build Installer
+
+# 从本仓库源代码可验证地构建 Windows 安装包。
+# Builds the Windows installer from this repository's source in a verifiable way.
+# 触发方式 / Triggers: 推送 v* 标签 / v* tags, 或手动运行 / or manual dispatch.
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download offline wheels
+        run: pip download -r requirements.txt -d installer/src/wheels
+
+      - name: Download Python 3.12.8 offline installer
+        run: |
+          New-Item -ItemType Directory -Force installer/src/redist | Out-Null
+          Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.12.8/python-3.12.8-amd64.exe" -OutFile "installer/src/redist/python-3.12.8-amd64.exe"
+
+      - name: Stage VC++ runtime DLLs
+        run: |
+          New-Item -ItemType Directory -Force installer/src/redist/vcrt | Out-Null
+          foreach ($dll in 'concrt140.dll','msvcp140.dll','msvcp140_1.dll','msvcp140_2.dll','msvcp140_atomic_wait.dll','vcruntime140.dll','vcruntime140_1.dll') {
+            Copy-Item "C:\Windows\System32\$dll" installer/src/redist/vcrt/
+          }
+
       - name: Stage application files
         run: |
           Copy-Item src/markitdown_gui.py,src/update.pyw,src/logtools.py,src/app.ico installer/src/
           Copy-Item docs/user-manual-v1.1.4-zh.pdf "installer/src/MarkItDown转换器使用说明书.pdf"
-          $enManual = "docs/user-manual-v1.1.4-en.pdf"
-          if (Test-Path $enManual) {
-            Copy-Item $enManual "installer/src/MarkItDown Converter User Guide.pdf"
-          } else {
-            Copy-Item docs/user-manual-v1.1.4-zh.pdf "installer/src/MarkItDown Converter User Guide.pdf"
-          }
           $ver = (Select-String -Path installer/setup.iss -Pattern '#define MyAppVersion "([^"]+)"').Matches.Groups[1].Value
           Set-Content -Path installer/src/VERSION -Value $ver -NoNewline
+
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+
+      - name: Compile installer
+        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer/setup.iss'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MarkItDown-Converter-Setup
+          path: installer/Output/*.exe
+          if-no-files-found: error
+
+      # SignPath 签名步骤（审核通过并配置 Secrets 后启用 / Enable after SignPath approval & secrets）：
+      # - uses: signpath/github-action-submit-signing-request@v1
+      #   with:
+      #     api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+      #     organization-id: ${{ secrets.SIGNPATH_ORG_ID }}
+      #     project-slug: 'markitdown-converter'
+      #     signing-policy-slug: 'release-signing'
+      #     artifact-configuration-slug: 'installer'
+      #     github-artifact-id: '${{ steps.upload.outputs.artifact-id }}'
+      #     wait-for-completion: true
